@@ -15,8 +15,6 @@ std::istream& operator >> (std::istream & input, std:: vector<T>& v){
 void answer( integer x ){
         std::cout<< x << "\n";
 }
-
-
 void solve(const std:: vector<unsigned>& x , unsigned a, unsigned b ){
         integer s = b;
         for(const unsigned q: x){

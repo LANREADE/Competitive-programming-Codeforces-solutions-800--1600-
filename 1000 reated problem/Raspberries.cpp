@@ -1,14 +1,34 @@
 # include<iostream>
-#include <bits\std.c++>
 # include  <vector>
 
+
 using namespace std;
+template<typename T> 
+std:: istream& operator >> (std:: istream& input , std::vector<T>& v){
+        for(T & a : v){
+                input >> a;
+        }
+        return input;
+}
+void answer(unsigned x){
+        std::cout << x << "\n";
+}
 
 void solve(std::vector<unsigned> &a , unsigned k){
         std:: vector<unsigned>dp(k);
         for(unsigned d = 0; d < k ; ++d){
                 dp[(a[i] + d ) % k] = d;
         }
+        for(auto it = a.begin() + 1 ; it != a.end(); ++it){
+                std::vector<unsigned> t = dp;
+                for(unsigned i = 0; i < k; ++i){
+                        for(unsigned d = 0 ; d < k ; ++d){
+                                t[i * (*it + d) % k] = std::min(t[i* (*it + d) % k] , dp[i] + d);
+                        }
+                }
+                dp = std::move(t);
+        }
+        answer(dp[0]);
 
 }
 void test_case(){
